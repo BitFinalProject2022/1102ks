@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>회원가입 페이지</title>
+</head>
+
+<style>
+    .fieldError{
+        color : red;
+    }
+</style>
+
+<body>
+	<h1>회원 가입</h1>
+	<hr>
+	
+	<form th:action="@{/user/signup}" method="post">
+		<div>
+        	<input type="text" name="email" placeholder="이메일 입력해주세요">
+        	<span class="fieldError" th:text="${valid_email}"></span>
+        </div>
+        <br>
+        <div>
+	        <input type="password" name="password" placeholder="비밀번호">
+	        <span class="fieldError" th:text="${valid_password}"></span>
+        </div>
+        <br>
+        <button type="submit">가입하기</button>
+    </form>
+	
+</body>
+</html>

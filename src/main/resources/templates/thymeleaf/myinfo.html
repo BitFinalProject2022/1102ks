@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+<meta charset="UTF-8">
+<title>내정보</title>
+</head>
+<body>
+	<h1>마이페이지</h1>
+	<hr>
+	<span sec:authentication="name"></span>님
+	<br>
+	<b>Authenticated DTO:</b>
+	<div sec:authentication="principal"></div>
+	<hr>
+	<a th:href="@{/}">메인으로 이동</a>
+	<a th:href="@{/user/upload}">사진 등록</a>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>테스트</title>
+
+<link id="contextPathHolder"
+	th:data-contextPath="${@environment.getProperty('thymeleaf.context.path.value')}" />
+</head>
+<body>
+	<h1>테스트 페이지입니다.</h1>
+	<hr>
+	<form id="image-upload" method="post"
+		action="${contextPath}/user/imageTest">
+		<input type="file" id="image">
+		<button type="submit">테스트</button>
+	</form>
+
+	<div>
+		<h2 id="image">이미지 경로</h2>
+		<br>
+		<h2 id="qty">분류 번호</h2>
+	</div>
+
+
+	<!-- 기능 JS -->
+	<script type="text/javascript">
+		// 경로, qty 받기
+		async function getQtyandPath() {
+			let form = document.formname;
+			
+			form.encoding = "multipart/form-data";
+			
+			let contextPath = document.querySelector('#contextPathHolder').getAttribute('data-contextPath');
+		    const targetUrl = contextPath + "/analysis";
+		    let formData = new FormData();
+			
+		    const options = {
+		        method: "post",
+		        body: formData,
+		    }
+			
+		    try {
+		        let response = await fetch(targetUrl);
+		        let image_info = await response.json();
+		        console.log(image_info);
+				
+		        let image_path = document.querySelector('#image');
+		        let cloth_kind = document.querySelector('#qty');
+				
+		        image_path.innerHTML = '사진 경로 : ' + image_info.image;
+		        cloth_kind.innerHTML = '분류 결과 : '  + image_info.qty;
+		        //status_day3.innerHTML = '&nbsp;&nbsp;&nbsp;' + weater_info[2].main_status
+				
+		    } catch (err) {
+		        console.log(err);
+		        console.log('히히히');
+		        console.log(response);
+		    }
+		}
+	</script>
+</body>
+</html>
